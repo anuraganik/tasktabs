@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TaskTabs</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging.js"></script>
+  <script>
+    // Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBmn18oxref7PeY7gR5aY2gWTVbAFCoT78",
+      authDomain: "tasktabs-auranik.firebaseapp.com",
+      projectId: "tasktabs-auranik",
+      storageBucket: "tasktabs-auranik.appspot.com",
+      messagingSenderId: "40723457877",
+      appId: "1:40723457877:web:d8bfb939719e264ca371dc",
+      measurementId: "G-875SPF3YF5"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Initialize Firebase Cloud Messaging and get a reference to the service
+    const messaging = firebase.messaging();
+
+    // Request permission and get token
+    messaging.requestPermission()
+      .then(function() {
+        console.log('Notification permission granted.');
+        return messaging.getToken({ vapidKey: 'BJBQ8606HIVuhhzEP5raDwBBs1SYeJgylWrR7dzl9h0TKwsQP8MXEMb_TVWDjbjnXChHTN384bRNDgR9cgJvl2A' });
+      })
+      .then(function(token) {
+        console.log('FCM Token:', token);
+        // You might want to send the token to your server here
+      })
+      .catch(function(err) {
+        console.log('Unable to get permission to notify.', err);
+      });
+
+    // Handle incoming messages
+    messaging.onMessage(function(payload) {
+      console.log('Message received. ', payload);
+      // Customize notification here
+      const notificationTitle = 'TaskTabs Notification';
+      const notificationOptions = {
+        body: payload.notification.body,
+        icon: payload.notification.icon
+      };
+      new Notification(notificationTitle, notificationOptions);
+    });
+  </script>
+  <script>
+    var serviceWorkerVersion = '"2970267622"';
+  </script>
+</head>
+<body>
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
+</html>
+
