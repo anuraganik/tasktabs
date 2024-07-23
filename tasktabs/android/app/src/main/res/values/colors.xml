@@ -1,0 +1,10 @@
+<resources>
+    <color name="colorPrimary">#FFEB3B</color> <!-- Bright Yellow -->
+    <color name="colorPrimaryDark">#FBC02D</color> <!-- Darker Yellow -->
+    <color name="colorAccent">#FF5722</color> <!-- Bright Orange -->
+    <color name="windowBackground">#FFFDE7</color> <!-- Light Cream -->
+    <color name="textColorPrimary">#212121</color> <!-- Dark Gray -->
+    <color name="textColorSecondary">#757575</color> <!-- Medium Gray -->
+    <color name="white">#FFFFFF</color> <!-- White -->
+</resources>
+

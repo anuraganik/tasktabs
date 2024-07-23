@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasktabs</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icons/Icon-192.png">
+    <script defer src="main.dart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-messaging.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBmn18oxref7PeY7gR5aY2gWTVbAFCoT78",
+        authDomain: "tasktabs-auranik.firebaseapp.com",
+        projectId: "tasktabs-auranik",
+        storageBucket: "tasktabs-auranik.appspot.com",
+        messagingSenderId: "40723457877",
+        appId: "1:40723457877:web:d8bfb939719e264ca371dc",
+        measurementId: "G-875SPF3YF5"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const messaging = firebase.messaging();
+      messaging.onMessage((payload) => {
+        console.log('Message received. ', payload);
+      });
+    </script>
+  </head>
+  <body>
+    <script src="flutter.js" defer></script>
+    <script src="main.dart.js" defer></script>
+  </body>
+</html>
+
