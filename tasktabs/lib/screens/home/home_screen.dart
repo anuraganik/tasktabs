@@ -10,20 +10,33 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Home Screen',
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: 20),
+          children: [
+            Text('Home Screen'),
             ElevatedButton(
               onPressed: () {
-                // Navigate to different screen or add more functionality
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DashboardScreen()),
+                );
               },
               child: Text('Go to Dashboard'),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class DashboardScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard'),
+      ),
+      body: Center(
+        child: Text('Welcome to the Dashboard'),
       ),
     );
   }
