@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:tasktabs/utils/constants.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
@@ -10,43 +9,21 @@ class CustomDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
+            child: Text("Menu"),
             decoration: BoxDecoration(
-              color: AppConstants.primaryColor,
-            ),
-            child: Text(
-              AppConstants.appName,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
+              color: Colors.blue,
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text("Dashboard"),
             onTap: () {
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushNamed(context, "/dashboard");
             },
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Profile'),
+            title: Text("Job List"),
             onTap: () {
-              Navigator.pushNamed(context, '/profile');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.work),
-            title: Text('Jobs'),
-            onTap: () {
-              Navigator.pushNamed(context, '/jobs');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () {
-              Navigator.pushNamed(context, '/settings');
+              Navigator.pushNamed(context, "/job-list");
             },
           ),
         ],
@@ -54,3 +31,4 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 }
+

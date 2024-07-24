@@ -1,16 +1,14 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tasktabs/models/user.dart';
 
 class UserService {
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
-
-  Future<User> getUser(String userId) async {
-    DocumentSnapshot doc = await _db.collection('users').doc(userId).get();
-    return User.fromFirestore(doc);
+  Future<List<User>> fetchUsers() async {
+    // Implement user fetching logic here
+    return [];
   }
 
-  Future<void> updateUser(User user) async {
-    await _db.collection('users').doc(user.id).set(user.toMap());
+  Future<void> addUser(User user) async {
+    // Implement user addition logic here
   }
 }
+

@@ -1,26 +1,18 @@
+
 import 'package:flutter/material.dart';
 
-class CustomInputField extends StatelessWidget {
-  final String label;
+class InputField extends StatelessWidget {
+  final String labelText;
   final TextEditingController controller;
-  final bool obscureText;
 
-  CustomInputField({
-    required this.label,
-    required this.controller,
-    this.obscureText = false,
-  });
+  InputField({required this.labelText, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      obscureText: obscureText,
       decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        labelText: labelText,
       ),
     );
   }

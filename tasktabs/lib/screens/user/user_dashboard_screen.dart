@@ -6,11 +6,12 @@ class UserDashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Dashboard'),
+        title: Text("User Dashboard"),
       ),
       body: Center(
-        child: Text('Welcome to your dashboard!'),
+        child: Text("User Dashboard Screen"),
       ),
     );
   }
 }
+

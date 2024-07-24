@@ -6,11 +6,12 @@ class VerificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Verification'),
+        title: Text("Verification"),
       ),
       body: Center(
-        child: Text('Please verify your email.'),
+        child: Text("Verification Screen"),
       ),
     );
   }
 }
+

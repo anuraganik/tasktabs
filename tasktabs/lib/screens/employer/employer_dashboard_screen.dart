@@ -6,11 +6,12 @@ class EmployerDashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Employer Dashboard'),
+        title: Text("Employer Dashboard"),
       ),
       body: Center(
-        child: Text('Welcome to your dashboard!'),
+        child: Text("Employer Dashboard Screen"),
       ),
     );
   }
 }
+

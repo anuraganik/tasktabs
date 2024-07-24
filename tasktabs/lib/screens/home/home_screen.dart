@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -5,21 +6,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TaskTabs Home'),
+        title: Text("Home Screen"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Home Screen'),
+          children: <Widget>[
+            Text("Welcome to Home Screen"),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DashboardScreen()),
-                );
+                Navigator.pushNamed(context, "/dashboard");
               },
-              child: Text('Go to Dashboard'),
+              child: Text("Go to Dashboard"),
             ),
           ],
         ),
@@ -28,16 +27,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class DashboardScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Dashboard'),
-      ),
-      body: Center(
-        child: Text('Welcome to the Dashboard'),
-      ),
-    );
-  }
-}

@@ -1,34 +1,32 @@
 #!/bin/bash
 
-# Define the base directory
-BASE_DIR=$(pwd)
+# Function to update Dart files
+update_dart_file() {
+  local filepath=$1
+  local content=$2
 
-# Create necessary directories
-mkdir -p lib/screens/home
-
-# Write firebase_options.dart
-cat <<EOL > $BASE_DIR/lib/firebase_options.dart
-import 'package:firebase_core/firebase_core.dart';
-
-class DefaultFirebaseOptions {
-  static const FirebaseOptions currentPlatform = FirebaseOptions(
-    apiKey: "AIzaSyBmn18oxref7PeY7gR5aY2gWTVbAFCoT78",
-    authDomain: "tasktabs-auranik.firebaseapp.com",
-    projectId: "tasktabs-auranik",
-    storageBucket: "tasktabs-auranik.appspot.com",
-    messagingSenderId: "40723457877",
-    appId: "1:40723457877:web:d8bfb939719e264ca371dc",
-    measurementId: "G-875SPF3YF5",
-  );
+  mkdir -p "$(dirname "$filepath")"
+  echo "$content" > "$filepath"
 }
-EOL
 
-# Write main.dart
-cat <<EOL > $BASE_DIR/lib/main.dart
+# Update the main.dart file
+update_dart_file "lib/main.dart" '
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'screens/home/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:tasktabs/providers/auth_provider.dart';
+import 'package:tasktabs/providers/job_provider.dart';
+import 'package:tasktabs/providers/user_provider.dart';
+import 'package:tasktabs/providers/employer_provider.dart';
+import 'package:tasktabs/screens/home/home_screen.dart';
+import 'package:tasktabs/screens/job/job_list_screen.dart';
+import 'package:tasktabs/screens/job/job_detail_screen.dart';
+import 'package:tasktabs/screens/job/post_job_screen.dart';
+import 'package:tasktabs/screens/user/user_profile_screen.dart';
+import 'package:tasktabs/screens/user/user_dashboard_screen.dart';
+import 'package:tasktabs/screens/employer/employer_profile_screen.dart';
+import 'package:tasktabs/screens/employer/employer_dashboard_screen.dart';
+import 'package:tasktabs/firebase_options.dart';
+import 'firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,64 +39,34 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TaskTabs',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomeScreen(),
-    );
-  }
-}
-EOL
-
-# Write home_screen.dart
-cat <<EOL > $BASE_DIR/lib/screens/home/home_screen.dart
-import 'package:flutter/material.dart';
-
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('TaskTabs Home'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Home Screen'),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DashboardScreen()),
-                );
-              },
-              child: Text('Go to Dashboard'),
-            ),
-          ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => JobProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => EmployerProvider()),
+      ],
+      child: MaterialApp(
+        title: 'TaskTabs',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
         ),
+        home: HomeScreen(),
+        routes: {
+          '/dashboard': (context) => DashboardScreen(),
+          '/job-list': (context) => JobListScreen(),
+          '/job-detail': (context) => JobDetailScreen(job: Job(id: '', title: '', description: '', employerId: '', salary: 0.0)),
+          '/post-job': (context) => PostJobScreen(),
+          '/user-profile': (context) => UserProfileScreen(),
+          '/user-dashboard': (context) => UserDashboardScreen(),
+          '/employer-profile': (context) => EmployerProfileScreen(),
+          '/employer-dashboard': (context) => EmployerDashboardScreen(),
+        },
       ),
     );
   }
 }
+'
 
-class DashboardScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Dashboard'),
-      ),
-      body: Center(
-        child: Text('Welcome to the Dashboard'),
-      ),
-    );
-  }
-}
-EOL
-
-# Print completion message
-echo "Project files have been updated successfully!"
+echo "Files updated successfully."
 
